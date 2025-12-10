@@ -1,53 +1,53 @@
-# Détection de fissures - démonstration simple
+# Crack Detection — Simple Demo
 
-Ce petit projet montre un pipeline d'inférence minimal en Python : il envoie une image à une API d'inférence (votre modèle déjà hébergé ailleurs), récupère des boxes (coordonnées de détections) et dessine des rectangles rouges sur l'image pour illustrer les résultats.
+This small project demonstrates a minimal inference pipeline in Python. It sends an image to an existing inference API (your model hosted elsewhere), receives detected boxes for cracks, and draws red rectangles on the image to show results.
 
-Fichiers fournis
-- `inference.py` : script principal. Usage : `python inference.py image.jpg`
-- `utils.py` : contient la fonction `draw_boxes` qui dessine et sauvegarde l'image de sortie.
-- `README.md` : ce fichier.
+Files included
+- `inference.py` : main script. Usage: `python inference.py image.jpg`
+- `utils.py` : contains the `draw_boxes` function to draw and save the output image.
+- `README.md` : this file.
 
-Installation (prérequis)
+Requirements
 - Python 3
-- Installer les librairies requises :
+- Install required libraries:
   - requests
   - pillow
 
-Exemple d'installation :
+Example install:
 ```
 pip install requests pillow
 ```
 
-Comment utiliser
-1. Remplacez l'URL de l'API dans `inference.py` :
-   - Ouvrez `inference.py` et modifiez la variable `API_URL` en haut du fichier.
-   - Exemple :
+How to use
+1. Replace the API URL in `inference.py`:
+   - Open `inference.py` and change the `API_URL` variable near the top.
+   - Example:
      ```
-     API_URL = "https://mon-serveur.example/api/predict"
+     API_URL = "https://my-server.example/api/predict"
      ```
 
-2. Lancez l'inférence sur une image :
+2. Run inference on an image:
 ```
 python inference.py image.jpg
 ```
-- Le script :
-  - enverra `image.jpg` à l'API,
-  - affichera la réponse JSON dans le terminal,
-  - dessinera un rectangle rouge autour de chaque box retournée,
-  - sauvegardera l'image annotée sous le nom `output.jpg`.
+- The script will:
+  - send `image.jpg` to the API,
+  - print the JSON response to the terminal,
+  - draw a red rectangle for each returned box,
+  - save the annotated image as `output.jpg`.
 
-Format attendu de la réponse de l'API
-- Le script attend un JSON de la forme (exemple) :
+Expected API response format
+- The script expects a JSON like:
 ```json
 {
   "boxes": [[x1, y1, x2, y2], [x1, y1, x2, y2]],
   "scores": [0.95, 0.87]
 }
 ```
-- Seul le champ `boxes` est utilisé par le script pour dessiner les rectangles. Les coordonnées doivent être en pixels, avec (0,0) en haut à gauche.
+- Only the `boxes` field is used for drawing. Coordinates are pixel values with (0,0) at the top-left.
 
-Notes et limitations
-- Ce projet est une démonstration simple pour un travail scolaire. Il ne comporte pas de gestion avancée des erreurs ni d'authentification pour l'API.
-- Si votre API attend un nom de champ différent que `image` pour le fichier, adaptez la fonction `send_image_for_inference` dans `inference.py`.
+Notes and limitations
+- This is a simple school demo. It does not include advanced error handling, authentication, or retries.
+- If your API expects a different file field name than `image`, or a different request format, edit the `send_image_for_inference` function in `inference.py`.
 
-Bonne démonstration !
+Good luck with your demo!
