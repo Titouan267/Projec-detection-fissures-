@@ -2,38 +2,31 @@
 """
 utils.py
 
-Fonction simple pour dessiner des rectangles rouges autour de boxes
-sur une image et sauvegarder le résultat.
+Simple helper to draw red rectangles around boxes on an image and save it.
 """
 from PIL import Image, ImageDraw
 
 def draw_boxes(input_image_path, boxes, output_image_path):
     """
-    Ouvre l'image à input_image_path, dessine un rectangle rouge pour chaque box
-    et sauvegarde dans output_image_path.
+    Open the image at input_image_path, draw a red rectangle for each box,
+    and save to output_image_path.
 
-    boxes : liste de boxes, chaque box est [x1, y1, x2, y2]
+    boxes : list of boxes, each box is [x1, y1, x2, y2]
     """
-    # Ouvrir l'image
     with Image.open(input_image_path) as img:
         draw = ImageDraw.Draw(img)
 
-        # Paramètres visuels
-        outline_color = (255, 0, 0)  # rouge
+        outline_color = (255, 0, 0)  # red
         line_width = 3
 
-        # Dessiner chaque box
         for box in boxes:
-            # S'assurer que la box contient 4 valeurs numériques
             try:
                 x1, y1, x2, y2 = box
-                # Convertir en int pour Pillow
                 rect = [int(x1), int(y1), int(x2), int(y2)]
-                # Pillow >= 5.0 accepte width, sinon on peut tracer plusieurs rectangles.
+                # Use width if Pillow supports it; otherwise it will still work in recent versions.
                 draw.rectangle(rect, outline=outline_color, width=line_width)
             except Exception:
-                # Ignorer les boxes mal formées
+                # Skip malformed boxes
                 continue
 
-        # Sauvegarder l'image résultante
         img.save(output_image_path)
