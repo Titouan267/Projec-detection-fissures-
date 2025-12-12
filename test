@@ -1,0 +1,10 @@
+from inference_sdk import InferenceHTTPClient
+
+# initialize the client
+CLIENT = InferenceHTTPClient(
+    api_url="https://serverless.roboflow.com",
+    api_key="0ni1aLOl4URBmjk08gjY"
+)
+
+# infer on a local image
+result = CLIENT.infer("YOUR_IMAGE.jpg", model_id="my-first-project-utgik/1")
